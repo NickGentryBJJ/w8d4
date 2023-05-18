@@ -96,3 +96,17 @@ const sum = curriedSum(4);
 console.log(sum(5)(30)(20)(1)); // => 56
 
 // curriedSum(4)(5)(30)(20)(1)
+
+
+Function.prototype.curry = function (numArgs) {
+    let numbers = [];
+    let func = this;
+    let _curry = function(num) {
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+        func.apply(numbers);
+    } else {
+        return func;
+    }}
+return func;
+}
