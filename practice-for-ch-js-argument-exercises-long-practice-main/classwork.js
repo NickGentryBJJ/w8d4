@@ -26,8 +26,13 @@ function sum(...args) {
 sum(1, 2, 3, 4) === 10;
 sum(1, 2, 3, 4, 5) === 15;
 
-Function.prototype.myBind = function (context, arguments) {
-    (){
 
+
+Function.prototype.myBind = function (context) {
+    let that = this;
+    let bindArgs = Array.from(arguments).slice(1);
+    return function() {
+        let helperArgs = Array.from(arguments);
+        that.apply(context, bindArgs.concat(helperArgs));
     }
-}
+};
